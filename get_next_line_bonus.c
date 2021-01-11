@@ -6,7 +6,7 @@
 /*   By: cjullien <cjullien@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 17:25:08 by cjullien          #+#    #+#             */
-/*   Updated: 2021/01/11 18:57:03 by user42           ###   ########.fr       */
+/*   Updated: 2021/01/11 19:19:26 by cjullien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	last_check(int i, char *str)
 
 int	get_next_line(int fd, char **line)
 {
-	static char		*str;
+	static char		*str[1024];
 	char			buffer[BUFFER_SIZE + 1];
 	int				i;
 
@@ -89,15 +89,15 @@ int	get_next_line(int fd, char **line)
 		if (i == -1)
 			return (i);
 		buffer[i] = '\0';
-		str = stock_prev_read(buffer, str);
+		str[fd] = stock_prev_read(buffer, str[fd]);
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
-	if (i <= 0 && !str)
+	if (i <= 0 && !str[fd])
 	{
 		*line = ft_strdup("");
 		return (i);
 	}
-	str = check_if_newline(line, str);
-	return (last_check(i, str));
+	str[fd] = check_if_newline(line, str[fd]);
+	return (last_check(i, str[fd]));
 }
