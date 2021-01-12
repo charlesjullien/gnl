@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-int	get_index(char *str)
+int		get_index(char *str)
 {
 	int	i;
 
@@ -66,7 +66,7 @@ char	*stock_prev_read(char *buffer, char *str)
 	return (str);
 }
 
-int	last_check(int i, char *str)
+int		last_check(int i, char *str)
 {
 	if (i <= 0 && !str)
 		return (i);
@@ -74,7 +74,7 @@ int	last_check(int i, char *str)
 		return (1);
 }
 
-int	get_next_line(int fd, char **line)
+int		get_next_line(int fd, char **line)
 {
 	static char		*str;
 	char			buffer[BUFFER_SIZE + 1];
